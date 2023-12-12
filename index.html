@@ -9,12 +9,33 @@
     <script type="module" src="./scripts.js"></script>
   </head>
   <body>
-  <div class="container">
-  <div class="progress-circular"></div>
-  <div class="controll-panel">
-  <input type="text" id="degree" class="degree-value-input">
-  <label for="degree">value</label>
-  </div>
-  </div>
+    <div class="container">
+      <div class="contents">
+        <h1 class="bar-header">Progress</h1>
+        <div class="progress-circular"></div>
+      </div>
+      <div class="controll-panel">
+        <div class="control-group">
+          <input type="text" id="degree" class="degree-value-input"/>
+          <label for="degree">Value</label>
+        </div>
+        <div class="control-group">
+          <input
+            type="checkbox"
+            id="animated"
+            class="animate-switch switch-checkbox"
+          />
+          <label for="animated">Animate</label>
+        </div>
+        <div class="control-group">
+          <input
+            type="checkbox"
+            id="hidden"
+            class="hide-switch switch-checkbox"
+          />
+          <label for="hidden">Hide</label>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
