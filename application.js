@@ -5,7 +5,6 @@ const elements = {
   hideSwitch: document.querySelector(".hide-switch"),
   feedback: document.querySelector(".feedback")
 };
-
 let start = 0;
 
 const renderProgressBar = (state) => {
@@ -32,7 +31,7 @@ const renderAnimation = (state) => {
     return
   }
   elements.progressCircular.classList.remove('rotate');
-  };
+};
 
 const renderHidden = (state) => {
   if (state.hide === 'Hidden') {
@@ -40,14 +39,14 @@ const renderHidden = (state) => {
     return;
   }
   elements.progressCircular.classList.remove('hidden');
-  };
+};
 const isValid = (value) => !(value < 0 || value > 100);
 const renderErrorState = (state) => {
   if (state.error === null) {
-    elements.feedback.classList.add('hidden');
+    elements.feedback.classList.add('hide-feedback');
     elements.valueInput.classList.remove('is-invalid');
   } else {
-    elements.feedback.classList.remove('hidden');
+    elements.feedback.classList.remove('hide-feedback');
     elements.valueInput.classList.add('is-invalid');
   }
 }
@@ -74,10 +73,11 @@ export default () => {
     if (target.checked) {
       state.animate = 'Animated';
       renderAnimation(state);
-  } else {
-    state.animate = 'Normal'
-    renderAnimation(state);
-  }});
+    } else {
+      state.animate = 'Normal'
+      renderAnimation(state);
+    }
+  });
 
   elements.hideSwitch.addEventListener('change', ({ target }) => {
     if (target.checked) {
@@ -90,11 +90,11 @@ export default () => {
   });
 };
 
-// функция валидации
-// нпм пакет
-// + свитчеры
-// функция анимации
-// разобраться со стейтами
 // разобраться с апи и ручками
-// расположение элементов - позиционирование
-// ведстка для мобилки - изменение для ландскейпа
+// нпм пакет
+// + функция валидации
+// + свитчеры
+// + функция анимации
+// + разобраться со стейтами
+// + расположение элементов - позиционирование
+// + ведстка для мобилки - изменение для ландскейпа

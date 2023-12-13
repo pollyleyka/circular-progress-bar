@@ -1,42 +1,35 @@
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Circular Progress Bar</title>
-    <link rel="stylesheet" href="style.css" />
-    <script type="module" src="./scripts.js"></script>
-  </head>
-  <body>
-    <div class="container">
-      <div class="contents">
-        <h1 class="progress-title">Progress</h1>
-        <div class="progress-circular"></div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Circular Progress Bar</title>
+  <link rel="stylesheet" href="style.css" />
+  <script type="module" src="./scripts.js"></script>
+</head>
+
+<body>
+  <div class="container modal-center flex-container">
+    <h1 class="progress-title">Progress</h1>
+    <div class="progress-circular flex-container"></div>
+    <div class="progress-control flex-container">
+      <div class="control-group">
+        <label class="label-element flex-container">
+          <input type="text" class="progress-control-input input-element" />
+          Value</label>
+        <p class="feedback hide-feedback">only number from 0 to 100</p>
       </div>
-      <div class="progress-control">
-        <div class="control-group">
-          <input type="text" id="degree" class="progress-control-input" type="number" min='0' max='100' />
-          <label for="degree">Value</label>
-          <p class="feedback hidden">only number from 0 to 100</p>
-        </div>
-        <div class="control-group">
-          <input
-            type="checkbox"
-            id="animated"
-            class="animate-switch switch-checkbox"
-          />
-          <label for="animated">Animate</label>
-        </div>
-        <div class="control-group">
-          <input
-            type="checkbox"
-            id="hidden"
-            class="hide-switch switch-checkbox"
-          />
-          <label for="hidden">Hide</label>
-        </div>
-      </div>
+      <label class="label-element flex-container">
+        <input type="checkbox" class="animate-switch switch-checkbox input-element" />
+        Animate</label>
+      <label class="label-element flex-container">
+        <input type="checkbox" class="hide-switch switch-checkbox input-element" />
+        Hide</label>
     </div>
-  </body>
+  </div>
+  </div>
+</body>
+
 </html>
