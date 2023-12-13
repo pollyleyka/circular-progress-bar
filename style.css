@@ -25,7 +25,11 @@ body {
   align-items: center;
   justify-content: space-between;
 }
-.bar-header {
+
+.progress-title {
+  position: absolute;
+  top: 0;
+  left: 0;
   font-family: sans-serif;
   font-size: 14px;
   font-weight: 600;
@@ -47,19 +51,48 @@ body {
   border-radius: 50%;
   background: white;
 }
+.rotate{
+  animation: loader 1.25s infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@keyframes loader {
+  0% {
+    rotate: 0deg;
+  }
+  100% {
+    border-radius: 50%;
+    rotate: 360deg;
+  }
+}
 
-.controll-panel {
+.progress-control {
   display: flex;
   flex-direction: column;
 }
-.degree-value-input {
+.progress-control-input {
 width: 35px;
 height: 20px;
 border-radius: 20px;
 border: 2px solid black;
+text-align: center;
+margin-right: 10px;
 }
-.degree-value-input:focus {
+
+.progress-control-input:focus {
 outline: none;
+}
+.is-invalid {
+  border: 2px solid red;
+}
+.feedback{
+  color: red;
+  font-size: 12px;
+}
+
+.progress-control-input:valid {
+  border: 2px solid black;
 }
 .hidden {
   display: none;

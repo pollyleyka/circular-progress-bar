@@ -11,13 +11,14 @@
   <body>
     <div class="container">
       <div class="contents">
-        <h1 class="bar-header">Progress</h1>
+        <h1 class="progress-title">Progress</h1>
         <div class="progress-circular"></div>
       </div>
-      <div class="controll-panel">
+      <div class="progress-control">
         <div class="control-group">
-          <input type="text" id="degree" class="degree-value-input"/>
+          <input type="text" id="degree" class="progress-control-input" type="number" min='0' max='100' />
           <label for="degree">Value</label>
+          <p class="feedback hidden">only number from 0 to 100</p>
         </div>
         <div class="control-group">
           <input

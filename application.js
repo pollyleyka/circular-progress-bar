@@ -1,8 +1,9 @@
 const elements = {
-  valueInput: document.querySelector(".degree-value-input"),
+  valueInput: document.querySelector(".progress-control-input"),
   progressCircular: document.querySelector(".progress-circular"),
   animateSwitch: document.querySelector(".animate-switch"),
   hideSwitch: document.querySelector(".hide-switch"),
+  feedback: document.querySelector(".feedback")
 };
 
 let start = 0;
@@ -19,67 +20,74 @@ const renderProgressBar = (state) => {
     if (start < state.value) {
       start += 1;
       progressEnd();
-    }
-    else {
-      start -= 1;
+    } else {
+      start = 0;
       progressEnd();
     }
-  }, 5)
+  }, 10)
 }
-const render = (state) => {
-  switch (state.uiState) {
-    case 'Hidden':
-      elements.progressCircular.classList.add('hidden');
-      elements.valueInput.setAttribute('disabled', 'true');
-      elements.valueInput.value = '';
-      break;
-    case 'Animated':
-      elements.valueInput.setAttribute('disabled', 'true');
-      elements.progressCircular.classList.remove('hidden');
-      elements.valueInput.value = '';
-      animate();
-      break;
-    case 'Normal':
-      elements.progressCircular.classList.remove('hidden');
-      elements.valueInput.removeAttribute('disabled');
-      renderProgressBar(state);
-      break;
-    default:
-      console.log(`unfamiliar state: ${state.uiState}.`);
+const renderAnimation = (state) => {
+  if (state.animate === 'Animated') {
+    elements.progressCircular.classList.add('rotate');
+    return
+  }
+  elements.progressCircular.classList.remove('rotate');
+  };
+
+const renderHidden = (state) => {
+  if (state.hide === 'Hidden') {
+    elements.progressCircular.classList.add('hidden');
+    return;
+  }
+  elements.progressCircular.classList.remove('hidden');
+  };
+const isValid = (value) => !(value < 0 || value > 100);
+const renderErrorState = (state) => {
+  if (state.error === null) {
+    elements.feedback.classList.add('hidden');
+    elements.valueInput.classList.remove('is-invalid');
+  } else {
+    elements.feedback.classList.remove('hidden');
+    elements.valueInput.classList.add('is-invalid');
   }
 }
 export default () => {
   const state = {
     value: 0,
-    uiState: 'Normal' //'Animated' 'Hidden'
+    error: null,
+    animate: 'Normal',
+    hide: 'Normal',
   };
   elements.valueInput.addEventListener('change', ({ target }) => {
+    if (!isValid(target.value)) {
+      state.error = 'inputError';
+      renderErrorState(state);
+      return;
+    }
+    state.error = null;
+    renderErrorState(state);
     state.value = target.value;
     renderProgressBar(state);
   });
 
   elements.animateSwitch.addEventListener('change', ({ target }) => {
     if (target.checked) {
-      state.uiState = 'Animated';
-      state.value = '';
-      render(state);
-    } else {
-      state.uiState = 'Normal';
-      render(state);
-    }
-  });
+      state.animate = 'Animated';
+      renderAnimation(state);
+  } else {
+    state.animate = 'Normal'
+    renderAnimation(state);
+  }});
+
   elements.hideSwitch.addEventListener('change', ({ target }) => {
     if (target.checked) {
-      state.uiState = 'Hidden';
-      state.value = '';
-      render(state);
+      state.hide = 'Hidden';
+      renderHidden(state);
     } else {
-      state.uiState = 'Normal';
-      render(state);
+      state.hide = 'Normal';
+      renderHidden(state);
     }
   });
-
-
 };
 
 // функция валидации
