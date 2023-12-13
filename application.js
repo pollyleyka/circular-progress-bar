@@ -1,3 +1,5 @@
+import ProgressBar from "./components/progress-bar/ProgressBar.js";
+
 const elements = {
   valueInput: document.querySelector(".progress-control-input"),
   progressCircular: document.querySelector(".progress-circular"),
@@ -5,41 +7,7 @@ const elements = {
   hideSwitch: document.querySelector(".hide-switch"),
   feedback: document.querySelector(".feedback")
 };
-let start = 0;
 
-const renderProgressBar = (state) => {
-  const progress = setInterval(() => {
-    const progressEnd = () => {
-      elements.progressCircular.style.background = `conic-gradient(rgb(2, 92, 255) ${start * 3.6}deg, rgb(223, 230, 239) 0deg)`;
-      if (start == state.value) {
-        clearInterval(progress);
-        state.value = '';
-      }
-    }
-    if (start < state.value) {
-      start += 1;
-      progressEnd();
-    } else {
-      start = 0;
-      progressEnd();
-    }
-  }, 10)
-}
-const renderAnimation = (state) => {
-  if (state.animate === 'Animated') {
-    elements.progressCircular.classList.add('rotate');
-    return
-  }
-  elements.progressCircular.classList.remove('rotate');
-};
-
-const renderHidden = (state) => {
-  if (state.hide === 'Hidden') {
-    elements.progressCircular.classList.add('hidden');
-    return;
-  }
-  elements.progressCircular.classList.remove('hidden');
-};
 const isValid = (value) => !(value < 0 || value > 100);
 const renderErrorState = (state) => {
   if (state.error === null) {
@@ -51,11 +19,9 @@ const renderErrorState = (state) => {
   }
 }
 export default () => {
+  const progressBar = new ProgressBar(elements.progressCircular)
   const state = {
-    value: 0,
     error: null,
-    animate: 'Normal',
-    hide: 'Normal',
   };
   elements.valueInput.addEventListener('change', ({ target }) => {
     if (!isValid(target.value)) {
@@ -65,36 +31,36 @@ export default () => {
     }
     state.error = null;
     renderErrorState(state);
-    state.value = target.value;
-    renderProgressBar(state);
+    progressBar.setValue(target.value);
   });
 
   elements.animateSwitch.addEventListener('change', ({ target }) => {
     if (target.checked) {
-      state.animate = 'Animated';
-      renderAnimation(state);
+      progressBar.setAnimationState('Animated').renderAnimation();
     } else {
-      state.animate = 'Normal'
-      renderAnimation(state);
+      progressBar.setAnimationState('Normal').renderAnimation();
     }
   });
 
   elements.hideSwitch.addEventListener('change', ({ target }) => {
     if (target.checked) {
-      state.hide = 'Hidden';
-      renderHidden(state);
+      progressBar.setHiddenState('Hidden').renderHiddenState();
     } else {
-      state.hide = 'Normal';
-      renderHidden(state);
+      progressBar.setHiddenState('Normal').renderHiddenState();
     }
   });
 };
 
 // разобраться с апи и ручками
-// нпм пакет
+// сделать сеты для стейтов 
 // + функция валидации
 // + свитчеры
 // + функция анимации
 // + разобраться со стейтами
 // + расположение элементов - позиционирование
 // + ведстка для мобилки - изменение для ландскейпа
+// перенести ошибку все таки в компонент(((
+//  нужно ли возвращать функции при сет стейте??? или делать отдельно паплайном как было.
+// дописать доку 
+// удалить .ДС с гитхаба
+

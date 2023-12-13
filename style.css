@@ -42,31 +42,6 @@ body {
   font-weight: 600;
   align-self: start;
 }
-.progress-circular {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  background: conic-gradient(rgb(2, 92, 255) 0deg, rgb(223, 230, 239) 0deg);
-  justify-content: center;
-}
-.progress-circular::after {
-  content: '';
-  width: 130px;
-  height: 130px;
-  border-radius: 50%;
-  background: white;
-}
-.rotate{
-  animation: loader 1.25s infinite;
-}
-@keyframes loader {
-  0% {
-    rotate: 0deg;
-  }
-  100% {
-    rotate: 360deg;
-  }
-}
 
 .progress-control {
   align-items: start;
@@ -138,10 +113,8 @@ outline: none;
   left: 15px;
 }
 @media (orientation: landscape) {
-  .container {
-    flex-direction: row;
-  }
   .container{
+    flex-direction: row;
     height: var(--modal-width);
     width: var(--modal-height);;
   }
