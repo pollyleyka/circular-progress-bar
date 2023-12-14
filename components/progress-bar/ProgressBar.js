@@ -11,23 +11,38 @@ class ProgressBar {
     return this.value;
   }
   setValue(value) {
-    this.value = value;
-    return this.renderProgressBar();
+    const isValid = (value) => (value >= 0 && value <= 100);
+    if (isValid(value)) {
+      this.value = value;
+      return this.renderProgressBar();
+    } else {
+      throw new Error(`${value} isn't correct value`);
+    }
   }
   getAnimationState() {
     return this.animationState;
   }
   setAnimationState(animationState) {
     this.animationState = animationState;
-    return this
-  }
+    if (this.animationState === 'Animated') {
+      this.element.classList.add('rotate');
+      return;
+    }
+    this.element.classList.remove('rotate');
+    return this;
+  };
   getHiddenState() {
     return this.hiddenState;
   }
   setHiddenState(hiddenState) {
     this.hiddenState = hiddenState;
+    if (this.hiddenState === 'Hidden') {
+      this.element.classList.add('hidden');
+      return;
+    }
+    this.element.classList.remove('hidden');
     return this;
-  }
+  };
 
   renderProgressBar() {
     const progress = setInterval(() => {
@@ -47,21 +62,5 @@ class ProgressBar {
       }
     }, 10)
   }
-  renderHiddenState() {
-    if (this.hiddenState === 'Hidden') {
-      this.element.classList.add('hidden');
-      return;
-    }
-    this.element.classList.remove('hidden');
-  };
-
-  renderAnimation() {
-    if (this.animationState === 'Animated') {
-      this.element.classList.add('rotate');
-      return;
-    }
-    this.element.classList.remove('rotate');
-  };
-
 }
 export default ProgressBar;

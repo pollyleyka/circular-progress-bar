@@ -42,7 +42,6 @@ body {
   font-weight: 600;
   align-self: start;
 }
-
 .progress-control {
   align-items: start;
 }
@@ -74,7 +73,6 @@ outline: none;
   font-size: 12px;
   padding: 0;
   margin: 0;
-
 }
 .hidden {
   visibility: hidden;
