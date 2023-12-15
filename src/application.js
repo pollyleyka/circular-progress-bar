@@ -24,7 +24,7 @@ export default () => {
   }
   const progressBar = new ProgressBar(elements.progressCircular);
 
-  elements.valueInput.addEventListener('change', ({ target }) => {
+  elements.valueInput.addEventListener('input', ({ target }) => {
     try {
       progressBar.setValue(target.value);
       state.errorState = null;
@@ -36,18 +36,11 @@ export default () => {
   });
 
   elements.animateSwitch.addEventListener('change', ({ target }) => {
-    if (target.checked) {
-      progressBar.setAnimationState('Animated');
-    } else {
-      progressBar.setAnimationState('Normal');
-    }
+    target.checked ? progressBar.setAnimationState('Animated') : progressBar.setAnimationState('Normal');
   });
 
   elements.hideSwitch.addEventListener('change', ({ target }) => {
-    if (target.checked) {
-      progressBar.setHiddenState('Hidden');
-    } else {
-      progressBar.setHiddenState('Normal');
-    }
+    target.checked ? progressBar.setHiddenState('Hidden') : progressBar.setHiddenState('Normal');
   });
 };
+

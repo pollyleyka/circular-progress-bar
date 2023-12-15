@@ -22,7 +22,7 @@
   border-radius: 50%;
   background: var(--color-neutral);
 }
-.rotate{
+.progress-circular-animate{
   animation: loader 1.25s infinite;
 }
 @keyframes loader {
