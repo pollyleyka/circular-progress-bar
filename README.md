@@ -1,5 +1,7 @@
 # circular-progress-bar
 
+Class JS component that shows the progress of any process.
+
 [DEMO](https://pollyleyka.github.io/circular-progress-bar/)
 
 Use progress bar in your app, it's easy!
